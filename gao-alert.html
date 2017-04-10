@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>gao-alert</title>
+    </head>
+    <body>
+        <button class='button-test' data-test=1>测试GaoAlert1</button>
+        <button class='button-test' data-test=2>测试GaoAlert2</button>
+        <button class='button-test' data-test=3>测试GaoPrompt3</button>
+        <button class='button-test' data-test=4>测试GaoActions4</button>
+<!--
+        <div class="modal-container modal-remove">
+            <div class="modal-mask"></div>
+            <div class="modal-alert vertical-center">
+                <div class="modal-title">
+                    title
+                </div>
+                <div class="modal-message">
+
+                    message
+                </div>
+                <div class="modal-control">
+                    <button class="modal-button">OK</button>
+                </div>
+            </div>
+        </div> -->
+    </body>
+    <script src=gao-alert.js></script>
+    <script>
+    var body = e('body')
+    body.addEventListener('click', function(event){
+        var target = event.target
+        if (target.classList.contains('button-test')) {
+            var testIndex = target.dataset.test
+            if (testIndex == '1') {
+                GaoAlert1('标题', '你好, 点击按钮可以关闭')
+            } else if (testIndex == '2') {
+                GaoAlert2('测试 2', '点击不同按钮会有不同的回调参数, 在终端中查看',function(r){
+                    log('用户点击了', r)
+                })
+            } else if (testIndex == '3') {
+                GaoPrompt('输入框', function(clickOk, input) {
+                    if (clickOk) {
+                        log('用户输入的内容是,', input)
+                    } else {
+                        log('用户取消了选择')
+                    }
+                })
+            } else if (testIndex == '4') {
+                var actions = ['看书', '喝水', '吃饭']
+                GaoActions('标题栏目', actions, function(index){
+                    if (index == -1) {
+                        log('用户取消了选择,', index)
+                    } else {
+                        log('用户的选择：', actions[index] )
+                    }
+                })
+            }
+        }
+    })
+    </script>
+</html>
